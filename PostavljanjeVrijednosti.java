@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import lab13.TextIO;
 
-public class PostavljanjeVrijednosti {
+public class DugiZadatak {
 	
 	/**
 	 * Funkcija kreira jednu matricu sa yadanom visinom i širinom
@@ -16,14 +16,6 @@ public class PostavljanjeVrijednosti {
 	public static int[][] kreirajMatricu (int vis)
 	{
 		int[][] matrica = new int[vis][vis];
-		for (int i=0; i<vis; i++)
-		{
-			for (int j=0; j<vis; j++)
-			{
-				System.out.println("Unesite član: (" + i + ", " + j + "): ");
-				matrica[i][j] = TextIO.getInt();
-			}
-		}
 		return matrica;
 	}
 	
@@ -148,17 +140,22 @@ public class PostavljanjeVrijednosti {
 	
 	public static int[][] postaviVrijednost(int[][] matrica)
 	{
-		System.out.println("Unesite koordinate broja kojeg želite promijeniti: ");
-		int x = TextIO.getInt();
-		int y = TextIO.getInt();
-		while (x < 0 || x > matrica.length-1 || y < 0 || y > matrica[x].length-1)
+		int brojac = 0;
+		while (brojac != matrica.length*matrica.length)
 		{
-			System.out.println("Niste unijeli validne koordinate! Ponovite unos: ");
-			x = TextIO.getInt();
-			y = TextIO.getInt();
+			System.out.println("Unesite koordinate broja kojeg želite promijeniti: ");
+			int x = TextIO.getInt();
+			int y = TextIO.getInt();
+			while (x < 0 || x > matrica.length-1 || y < 0 || y > matrica[x].length-1)
+			{
+				System.out.println("Niste unijeli validne koordinate! Ponovite unos: ");
+				x = TextIO.getInt();
+				y = TextIO.getInt();
+			}
+			System.out.println("Unesite novu vrijednost: ");
+			matrica[x][y]=TextIO.getInt();
+			brojac++;
 		}
-		System.out.println("Unesite novu vrijednost: ");
-		matrica[x][y]=TextIO.getInt();
 		return matrica;
 	}
 	
@@ -167,6 +164,7 @@ public class PostavljanjeVrijednosti {
 		System.out.println("Unesi visinu: ");
 		visina = TextIO.getInt();
 		int [][] matrica = kreirajMatricu(visina);
+		postaviVrijednost(matrica);
 		ispisiMatricu(matrica);
 	}
 
